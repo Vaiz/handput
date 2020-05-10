@@ -1,18 +1,32 @@
 #include "pch.h"
 #include "camera.h"
 #include "window.h"
+#include "filter.h"
+
+
 
 int main() {
     try {
         Window window("Test");
         auto cam = Camera::open_default();
         Frame frame;
+        FilterRoulette backgroundFilters;
 
-        while (true) {
+        bool bFinish = false;
+        while (!bFinish) {
             cam.read_frame(frame);
             cv::flip(frame, frame, 1);
+
+            backgroundFilters.apply(frame);
+
             const i32 key = window.update_and_wait(frame, 10);
-            if (key > 0 && key != 255) {
+
+            switch (key) {
+            case 'q':
+                bFinish = true;
+                break;
+            case 'f':
+                backgroundFilters.next();
                 break;
             }
         }

@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
+    <ClInclude Include="filter.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="types.h" />
     <ClInclude Include="window.h" />
